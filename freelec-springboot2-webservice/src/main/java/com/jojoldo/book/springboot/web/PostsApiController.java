@@ -1,3 +1,4 @@
+
 package com.jojoldo.book.springboot.web;
 
 import com.jojoldo.book.springboot.service.posts.PostsService;

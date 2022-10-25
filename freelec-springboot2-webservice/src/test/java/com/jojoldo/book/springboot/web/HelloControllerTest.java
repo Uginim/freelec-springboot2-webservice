@@ -21,7 +21,7 @@ jsonPath
 @WebMvcTest(controllers = HelloController.class)
 // 테스트 어노테이션 , Web(Spring MVC)전용 @Service, @Component, Repositor등 사용 불가
 // 컨트롤러만 사용시 선언
-public class HellowControllerTest {
+public class HelloControllerTest {
 
     @Autowired // 스프링이 관리하는 빈 주입
     private MockMvc mvc; // 웹 API테스트 시 사용
@@ -35,6 +35,7 @@ public class HellowControllerTest {
         mvc.perform(get("/hello"))
                 .andExpect(status().isOk())
                 .andExpect(content().string(hello));
+        System.out.printf("hello!");
     }
 
     @Test
