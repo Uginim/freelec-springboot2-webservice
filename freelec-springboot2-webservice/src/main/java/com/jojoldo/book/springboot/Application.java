@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 
-@EnableJpaAuditing
+//@EnableJpaAuditing
 @SpringBootApplication
 /* 스프링부트의 자동설정
     , Bean 읽기 생성 자동 설정 해당 어노테이션의 위치부터 설정을 읽어감 */

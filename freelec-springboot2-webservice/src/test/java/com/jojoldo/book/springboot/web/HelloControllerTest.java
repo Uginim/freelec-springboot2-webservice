@@ -1,8 +1,12 @@
 package com.jojoldo.book.springboot.web;
+import com.jojoldo.book.springboot.config.auth.SecurityConfig;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.FilterType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -18,7 +22,10 @@ jsonPath
  */
 @RunWith(SpringRunner.class) // 실행 시, JUnit에 내장된 실행자 외에 다른 실행자를 실행시킴
 // SpringRunner는 스프링 실행자
-@WebMvcTest(controllers = HelloController.class)
+@WebMvcTest(controllers = HelloController.class,
+    excludeFilters = {
+        @ComponentScan.Filter(type= FilterType.ASSIGNABLE_TYPE, classes = SecurityConfig.class)
+    })
 // 테스트 어노테이션 , Web(Spring MVC)전용 @Service, @Component, Repositor등 사용 불가
 // 컨트롤러만 사용시 선언
 public class HelloControllerTest {
@@ -29,6 +36,7 @@ public class HelloControllerTest {
 
 
     @Test
+    @WithMockUser(roles="USER")
     public void hello가_리턴된다() throws Exception {
         String hello = "hello";
 
@@ -38,6 +46,7 @@ public class HelloControllerTest {
         System.out.printf("hello!");
     }
 
+    @WithMockUser(roles="USER")
     @Test
     public void helloDto가_리턴된다() throws Exception {
         String name = "hello";
@@ -49,7 +58,6 @@ public class HelloControllerTest {
                     .andExpect(status().isOk())
                     .andExpect(jsonPath("$.name",is(name)))
                 .andExpect(jsonPath("$.amount",is(amount)));
-
     }
 
 }
