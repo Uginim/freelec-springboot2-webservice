@@ -6,6 +6,7 @@ PROJECT_NAME=freelec-springboot2-webservice
 echo "> Build 파일 복사"
 
 cp $REPOSITORY/zip/*.jar $REPOSITORY/
+echo "REPOSITORY : $REPOSITORY"
 
 echo "> 현재 구동중인 애플리케이션 pid 확인"
 
@@ -23,16 +24,16 @@ fi
 
 echo "> 새 어플리케이션 배포"
 
-JAR_NAME=$(ls -tr $REPOSITORY/ | grep jar | tail -n 1)
+JAR_NAME=$(ls -tr $REPOSITORY/*.jar | tail -n 1)
 
 echo "> JAR Name: $JAR_NAME"
 
 echo "> $JAR_NAME 에 실행권한 추가"
 
 chmod +x $JAR_NAME
+echo $(pwd)
 
 echo "> $JAR_NAME 실행"
-echo $(pwd)
 
 nohup java -jar \
   -Dspring.config.location=classpath:/application.properties,/home/ec2-user/app/application-oauth.properties,/home/ec2-user/app/application-real-db.properties,classpath:/application-real.properties \
