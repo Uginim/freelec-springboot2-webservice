@@ -18,3 +18,7 @@ notifications:
   email:
     recipients:
       - "hyeonukkim1990@gmail.com"
+
+# travis 빌드 시, gradlew 권한설정
+before_install:
+  - chmod +x gradlew
